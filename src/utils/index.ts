@@ -1,0 +1,2 @@
+
+export { shallowEqual } from "./shallowEqual"

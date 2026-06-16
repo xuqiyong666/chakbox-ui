@@ -1,0 +1,31 @@
+export const FLEXBOX_CSS_KEYS = [
+  'alignItems',
+  'alignContent',
+  'justifyItems',
+  'justifyContent',
+  'flexWrap',
+  'flexDirection',
+  'flex',
+  'flexFlow',
+  'flexGrow',
+  'flexShrink',
+  'flexBasis',
+  'justifySelf',
+  'alignSelf',
+  'order',
+  'placeItems',
+  'placeContent',
+  'placeSelf',
+  'gap',
+  'rowGap',
+  'columnGap',
+] as const
+
+export const FLEXBOX_ALIASES = {
+  direction: 'flexDirection',
+  flexDir: 'flexDirection',
+  spacing: 'gap',
+  align: 'alignItems',
+  justify: 'justifyContent',
+  wrap: 'flexWrap',
+} as const
