@@ -3,7 +3,7 @@
  * disabled = true 时退化为普通 Box；
  * disabled = false 时使用独立的 SimpleBar 实现。
  */
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { Box } from 'chakbox-ui';
 import { type ScrollableBoxProps } from './types';
 import { ScrollableBoxSimpleBar, type ScrollableBoxSimpleBarRef } from './ScrollableBoxSimpleBar';

@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle, useMemo, useRef } from 'react';
+import { forwardRef, useImperativeHandle, useMemo, useRef, type ComponentRef, type CSSProperties } from 'react';
 import SimpleBar from 'simplebar-react';
 import { Box, type BoxProps } from 'chakbox-ui';
 import { type ScrollableBoxProps } from './types';
@@ -8,13 +8,15 @@ export interface ScrollableBoxSimpleBarRef {
   getScrollElement: () => HTMLElement | null;
 }
 
+type SimpleBarRef = ComponentRef<typeof SimpleBar>;
+
 const defaultSimpleBarProps = {
   autoHide: true,
   scrollbarMinSize: 20,
   forceVisible: false,
 } as const;
 
-const defaultSimpleBarStyle: React.CSSProperties = {
+const defaultSimpleBarStyle: CSSProperties = {
   height: '100%',
   width: '100%',
 };
@@ -29,7 +31,7 @@ export const ScrollableBoxSimpleBar = forwardRef<ScrollableBoxSimpleBarRef, Scro
   simpleBarProps,
   ...boxProps
 }, ref) => {
-  const simpleBarRef = useRef(null);
+  const simpleBarRef = useRef<SimpleBarRef>(null);
 
   useImperativeHandle(ref, () => ({
     getScrollElement: () => {
@@ -57,7 +59,7 @@ export const ScrollableBoxSimpleBar = forwardRef<ScrollableBoxSimpleBarRef, Scro
     [simpleBarProps]
   );
 
-  const mergedSimpleBarStyle = useMemo<React.CSSProperties>(
+  const mergedSimpleBarStyle = useMemo<CSSProperties>(
     () => ({
       ...defaultSimpleBarStyle,
       ...simpleBarProps?.style,

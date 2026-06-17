@@ -1,5 +1,5 @@
 import { Menu } from 'antd'
-import { Box, Code, Heading, HStack, Text, VStack, version } from 'chakbox-ui'
+import { Box, Heading, HStack, Text, VStack, version } from 'chakbox-ui'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 
 import { demoRoutes } from '../routes'
