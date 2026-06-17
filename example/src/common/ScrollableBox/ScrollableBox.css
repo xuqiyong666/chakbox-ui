@@ -1,0 +1,264 @@
+/**
+ * ScrollableBox 苹果风格滚动条样式
+ * 基于 simplebar-react 默认样式，仅修改视觉样式（颜色、大小、圆角等）
+ * 保留所有功能性样式，确保滚动条显示逻辑正常工作
+ * 使用命名空间 .scrollable-box 实现样式隔离
+ */
+
+/* ========== 基础样式（保留默认功能，不做修改） ========== */
+
+.scrollable-box [data-simplebar] {
+  position: relative;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: flex-start;
+}
+
+.scrollable-box .simplebar-wrapper {
+  overflow: hidden;
+  width: inherit;
+  height: inherit;
+  max-width: inherit;
+  max-height: inherit;
+}
+
+.scrollable-box .simplebar-mask {
+  direction: inherit;
+  position: absolute;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: auto !important;
+  height: auto !important;
+  z-index: 0;
+}
+
+.scrollable-box .simplebar-offset {
+  direction: inherit !important;
+  box-sizing: inherit !important;
+  resize: none !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 0;
+  margin: 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 关键：必须保留 overflow-y: auto，否则滚动事件无法触发 */
+/* 仅支持纵向滚动，禁用横向滚动 */
+.scrollable-box .simplebar-content-wrapper {
+  direction: inherit;
+  box-sizing: border-box !important;
+  position: relative;
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  max-height: 100%;
+  overflow-x: hidden; /* 禁用横向滚动 */
+  overflow-y: auto; /* 关键：必须保留，用于触发纵向滚动事件 */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollable-box .simplebar-content-wrapper::-webkit-scrollbar,
+.scrollable-box .simplebar-hide-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.scrollable-box .simplebar-content:after,
+.scrollable-box .simplebar-content:before {
+  content: ' ';
+  display: table;
+}
+
+.scrollable-box .simplebar-placeholder {
+  max-height: 100%;
+  max-width: 100%;
+  width: 100%;
+  pointer-events: none;
+}
+
+.scrollable-box .simplebar-height-auto-observer-wrapper {
+  box-sizing: inherit !important;
+  height: 100%;
+  width: 100%;
+  max-width: 1px;
+  position: relative;
+  float: left;
+  max-height: 1px;
+  overflow: hidden;
+  z-index: -1;
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+  flex-grow: inherit;
+  flex-shrink: 0;
+  flex-basis: 0;
+}
+
+.scrollable-box .simplebar-height-auto-observer {
+  box-sizing: inherit;
+  display: block;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1000%;
+  width: 1000%;
+  min-height: 1px;
+  min-width: 1px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ========== 滚动条轨道（仅修改视觉样式） ========== */
+
+.scrollable-box .simplebar-track {
+  z-index: 1;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+  /* 保持透明，不设置背景 */
+}
+
+.scrollable-box .simplebar-track.simplebar-vertical {
+  top: 0;
+  width: 10px;
+}
+
+.scrollable-box .simplebar-track.simplebar-horizontal {
+  left: 0;
+  height: 10px;
+}
+
+/* ========== 滚动条样式（仅修改视觉样式，保留显示/隐藏逻辑） ========== */
+
+.scrollable-box .simplebar-scrollbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  min-height: 10px;
+  /* 注意：不设置 opacity，让 SimpleBar 通过 simplebar-visible 类控制显示 */
+}
+
+.scrollable-box .simplebar-track.simplebar-horizontal .simplebar-scrollbar {
+  right: auto;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  min-height: 0;
+  min-width: 10px;
+  width: auto;
+}
+
+/* 滚动条内容 - 自定义风格（仅修改视觉样式） */
+.scrollable-box .simplebar-scrollbar:before {
+  position: absolute;
+  content: '';
+  /* 默认颜色：浅灰色 */
+  background: #d5d5d5;
+  /* 完全圆角 */
+  border-radius: 3px;
+  /* 保留默认的间距 */
+  left: 2px;
+  right: 2px;
+  top: 2px;
+  bottom: 2px;
+  /* 保留默认的显示/隐藏逻辑 */
+  opacity: 0;
+  transition: opacity 0.2s 0.5s linear;
+}
+
+/* 滚动条显示时（SimpleBar 自动添加 simplebar-visible 类） */
+.scrollable-box .simplebar-scrollbar.simplebar-visible:before {
+  opacity: 1;
+  transition-delay: 0s;
+  transition-duration: 0s;
+}
+
+/* Hover 时变深 */
+.scrollable-box .simplebar-wrapper:hover .simplebar-scrollbar:before {
+  background-color: #c6c6c6;
+}
+
+/* 滚动条拖拽时（Active 状态） */
+.scrollable-box .simplebar-scrollbar.simplebar-dragging:before {
+  background-color: #c6c6c6;
+}
+
+/* RTL 支持 */
+.scrollable-box [data-simplebar-direction=rtl] .simplebar-track.simplebar-vertical {
+  right: auto;
+  left: 0;
+}
+
+/* ========== 拖拽状态样式（保留功能） ========== */
+
+.scrollable-box [data-simplebar].simplebar-dragging {
+  pointer-events: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.scrollable-box [data-simplebar].simplebar-dragging .simplebar-content {
+  pointer-events: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.scrollable-box [data-simplebar].simplebar-dragging .simplebar-track {
+  pointer-events: all;
+}
+
+/* ========== 其他工具样式（保留） ========== */
+
+.scrollable-box .simplebar-dummy-scrollbar-size {
+  direction: rtl;
+  position: fixed;
+  opacity: 0;
+  visibility: hidden;
+  height: 500px;
+  width: 500px;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  -ms-overflow-style: scrollbar !important;
+}
+
+.scrollable-box .simplebar-dummy-scrollbar-size > div {
+  width: 200%;
+  height: 200%;
+  margin: 10px 0;
+}
+
+.scrollable-box .simplebar-hide-scrollbar {
+  position: fixed;
+  left: 0;
+  visibility: hidden;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+

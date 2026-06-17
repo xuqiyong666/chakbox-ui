@@ -94,6 +94,9 @@ export function OverviewPage() {
       <DemoSection title="示例导航" description="左侧菜单进入各专题">
         <Stack gap={8}>
           <Text>
+            <Link to="/style-props">样式 Props</Link> — 样式简写与 CSS 属性对照表
+          </Text>
+          <Text>
             <Link to="/layout">布局</Link> — Center、Stack、HStack、VStack 等常见布局与排版
           </Text>
           <Text>

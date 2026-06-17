@@ -29,12 +29,10 @@ export function AppLayout() {
             chakbox-ui
           </Heading>
           <Text color="#999" fontSize={14}>
-            示例应用
+            v{version}
           </Text>
         </HStack>
-        <Text color="#666" fontSize={14}>
-          <Code>v{version}</Code>
-        </Text>
+        <Text></Text>
       </HStack>
 
       <HStack flex={1} align="stretch" overflow="hidden">
