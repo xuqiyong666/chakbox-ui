@@ -8,6 +8,9 @@ export { Text } from './components/Text'
 export { Heading } from './components/Heading'
 export { Code } from './components/Code'
 
+export { boxClass } from './boxClass'
+export { useBoxClass } from './hooks/useBoxClass'
+
 export type { HeadingProps } from './components/Heading'
 export type { TextProps } from './components/Text'
 export type { FlexProps } from './components/Flex'
@@ -16,6 +19,7 @@ export type { HStackProps } from './components/HStack'
 export type { VStackProps } from './components/VStack'
 export type { CenterProps } from './components/Center'
 export type { CodeProps } from './components/Code'
+export type { BoxClassProps } from './boxClass'
 export type {
   BoxComponent,
   BoxLikeProps,
